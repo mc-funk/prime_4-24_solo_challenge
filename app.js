@@ -7,17 +7,28 @@ $(document).ready(function() {
         console.log("HERE IS THE AFTER TOARRAYS THING: ", csvArray);
         csvArray = shuffleArray(csvArray);
         console.log("Newly shuffled: ", csvArray);
+
         for (i = 0; i < csvArray.length; i++) {
-            $("#quotes").append("<div style='display:none' id='quote" + i + "'><div class = 'quote'>" + csvArray[i][1] +
-                "</div><div class='date'>" + csvArray[i][0] + "</div></div>")
+            //style='display:none'
+            $("#quotes").append("<div style='display:none' id='quote" + i + "'><div class = 'thisQuote'>" + csvArray[i][1] +
+                "</div><div class='date'>" + csvArray[i][0] + "</div></div>");
         }
-        $("#quotes").children(".quote").each(function() {
-            console.log($(this))
-            $(this).siblings().fadeOut(1500;
-            $(this).fadeIn(1500);
-        });
+
+        for (i = 0; i < csvArray.length; i++) {
+            $("#quote" + i).fadeIn(500).delay(1500).fadeOut(500).delay(1500);
+        }
+
+         /* var eachQuote;eachQuote = $("#quotes").children("#quote" + i);
+            eachQuote.show(800).delay(1500).hide(800);
+            //eachQuote.fadeIn(800).delay(1500).fadeOut(800);
+        }*/
+
     });
 
+
+    /*$("#quotes").children(".thisQuote").each(function() {
+
+    });*/
     //console.log("so, does csvArray work?: ", csvArray)
 
     //shuffleArray function: implementation of Fisher-Yates shuffle algorithm
