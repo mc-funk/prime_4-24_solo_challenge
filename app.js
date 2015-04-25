@@ -3,27 +3,30 @@ var csvArray;
 var i;
 
 $(document).ready(function() {
+     $.get("shoutout9-24.csv", {}, function (data) {
+         //Convet CSV data to array
+         csvArray = $.csv.toArrays(data);
+         //Rearrange array items in a random fashion
+         csvArray = shuffleArray(csvArray);
+         //Create title slide
+         $("#quotes").append("<div class = 'intro''><div class = 'thisQuote'>Prime Digital Academy Beta Cohort<br>Students give shout-outs & thanks</div><div class='date'>April 2015</div></div>");
 
-    $.get("shoutout9-24.csv", {}, function (data) {
-        //console.log("Data: ", data);
-        csvArray = $.csv.toArrays(data);
-        console.log("HERE IS THE AFTER TOARRAYS THING: ", csvArray);
-        csvArray = shuffleArray(csvArray);
-        console.log("Newly shuffled: ", csvArray);
+         for (i = 0; i < csvArray.length; i++) {
 
-        for (i = 0; i < csvArray.length; i++) {
-            //style='display:none'
             $("#quotes").append("<div style='display:none' id='quote" + i + "'><div class = 'thisQuote'>" + csvArray[i][1] +
                 "</div><div class='date'>" + csvArray[i][0] + "</div></div>");
         }
         i = 0;
         setInterval(function() {
-            $("#quote" + i).fadeIn(1500).delay(2000).slideUp(1000).delay(1500);
+            if (i == 0) {
+                $(".intro").slideUp(800);
+            }
+            $("#quote" + i).fadeIn(2000).delay(2500).slideUp(1000).delay(1500);
             i++
             if (i == csvArray.length) {
                 i = 0;
             }
-        }, 4000);
+        }, 4500);
 
          /* var eachQuote;eachQuote = $("#quotes").children("#quote" + i);
             eachQuote.show(800).delay(1500).hide(800);
