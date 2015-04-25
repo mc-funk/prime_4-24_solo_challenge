@@ -1,6 +1,9 @@
+var csv;
+var csvArray;
+var i;
+
 $(document).ready(function() {
-    var csv;
-    var csvArray;
+
     $.get("shoutout9-24.csv", {}, function (data) {
         //console.log("Data: ", data);
         csvArray = $.csv.toArrays(data);
@@ -13,10 +16,14 @@ $(document).ready(function() {
             $("#quotes").append("<div style='display:none' id='quote" + i + "'><div class = 'thisQuote'>" + csvArray[i][1] +
                 "</div><div class='date'>" + csvArray[i][0] + "</div></div>");
         }
-
-        for (i = 0; i < csvArray.length; i++) {
-            $("#quote" + i).fadeIn(500).delay(1500).fadeOut(500).delay(1500);
-        }
+        i = 0;
+        setInterval(function() {
+            $("#quote" + i).fadeIn(1500).delay(2000).slideUp(1000).delay(1500);
+            i++
+            if (i == csvArray.length) {
+                i = 0;
+            }
+        }, 4000);
 
          /* var eachQuote;eachQuote = $("#quotes").children("#quote" + i);
             eachQuote.show(800).delay(1500).hide(800);
@@ -29,7 +36,7 @@ $(document).ready(function() {
     /*$("#quotes").children(".thisQuote").each(function() {
 
     });*/
-    //console.log("so, does csvArray work?: ", csvArray)
+    console.log("so, does csvArray work?: ", csvArray)
 
     //shuffleArray function: implementation of Fisher-Yates shuffle algorithm
     //Found at: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
